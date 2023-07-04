@@ -1,4 +1,4 @@
-export * from "./";
+export * from "./Taxi";
 
 export interface SvgPropsType {
   onClick?: (e: React.MouseEvent<SVGElement, MouseEvent>) => void;
