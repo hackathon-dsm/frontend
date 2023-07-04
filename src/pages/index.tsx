@@ -8,3 +8,7 @@ const _Wrapper = styled.div`
   font-size: 100px;
   color: ${({ theme }) => theme.color.white};
 `;
+
+const _input = styled.input`
+  width: 100%;
+`
