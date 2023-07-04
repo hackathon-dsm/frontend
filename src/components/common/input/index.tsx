@@ -5,6 +5,7 @@ interface PropsType {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: "text" | "password" | "email";
   value: string;
+  name: string;
   placeholder: string;
   errorMsg?: string;
 }
@@ -13,6 +14,7 @@ export const Input = ({
   onChange,
   type = "text",
   value,
+  name,
   placeholder,
   errorMsg,
 }: PropsType) => {
@@ -21,6 +23,7 @@ export const Input = ({
       <_Input
         type={type}
         value={value}
+        name={name}
         placeholder={placeholder}
         onChange={onChange}
         isError={errorMsg}
