@@ -4,8 +4,8 @@ import {} from "react-dom";
 import { Route, Routes } from "react-router-dom";
 import { GlobalStyle } from "./style";
 import { Main } from "./pages";
-import { SignUp } from "./pages/signup";
 import { SignIn } from "./pages/signin";
+import { SignUp } from "./pages/signup";
 
 
 function App() {
