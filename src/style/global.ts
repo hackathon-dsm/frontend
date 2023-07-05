@@ -6,4 +6,9 @@ export const GlobalCss = createGlobalStyle`
         padding: 0;
         font-family: 'Noto Sans KR', sans-serif;
     }
-`
+    button {
+        outline: 0;
+        border: 0;
+        
+    }
+`;
