@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Polyline } from "react-kakao-maps-sdk";
 import { GeoLocationType } from "./useGeolocation";
 
-export const useCalculateLine = (target: GeoLocationType) => {
+const defaulta = { lat: 36.35232530104873, lng: 127.39250839098673 };
+
+export const useCalculateLine = (
+  location: GeoLocationType | null,
+  target: GeoLocationType | null
+) => {
   const [line, setLine] = useState<number>(0);
-  const onLineChange = ({ getLength }: kakao.maps.Polyline) => {
-    setLine(getLength());
+  const onLineChange = (e: kakao.maps.Polyline) => {
+    setLine(e.getLength());
   };
-  const LineElement = () => <Polyline path={[target]} />;
-  return [line, onLineChange];
+  return [line, onLineChange] as const;
 };

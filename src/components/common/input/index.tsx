@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 import { ChangeEvent } from "react";
 
-interface PropsType {
+interface PropsType
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: "text" | "password" | "email";
   value: string;
@@ -17,6 +21,7 @@ export const Input = ({
   name,
   placeholder,
   errorMsg,
+  ...arg
 }: PropsType) => {
   return (
     <_Wrapper>
@@ -27,6 +32,7 @@ export const Input = ({
         placeholder={placeholder}
         onChange={onChange}
         isError={errorMsg}
+        {...arg}
       />
       <_Hint>{errorMsg}</_Hint>
     </_Wrapper>

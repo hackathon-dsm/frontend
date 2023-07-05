@@ -14,7 +14,6 @@ export const useForm = <T>(initial: T) => {
     }
     else {
       setState({ ...state, [name]: value });
-
     }
   };
   return { state, onHandleChange, setState };
