@@ -10,7 +10,7 @@ interface UserSignInResponse {
   id: number;
 }
 
-export const taxiSignIn = async (body: UserSignInRequest) => {
+export const userSignIn = async (body: UserSignInRequest) => {
   return instance.post<UserSignInResponse>("/user/login", body);
 };
 
@@ -21,7 +21,7 @@ export interface UserSignUpRequest {
   caution: string;
 }
 
-export const taxiSignUp = async (body: UserSignUpRequest) => {
+export const userSignUp = async (body: UserSignUpRequest) => {
   return await instance.post("/user", body);
 };
 

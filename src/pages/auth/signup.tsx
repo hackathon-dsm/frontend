@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { Taxi } from "../../assets/svg";
 import { Input } from "../../components/common/input";
 import { useForm } from "../../hooks/useForm";
 import { Logo } from "../../components/common/logo";
+import { userSignUp } from "../../apis/auth/user";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const { state, onHandleChange } = useForm({
@@ -12,19 +15,33 @@ export const SignUp = () => {
     lastName: "",
     email: "",
     password: "",
-    obstacles: ""
+    caution: "",
   });
+  const navi = useNavigate();
+  const { mutate } = useMutation(
+    () => {
+      const { firstName, lastName, ...arg } = state;
+      return userSignUp({ ...arg, name: firstName + lastName });
+    },
+    {
+      onSuccess: () => navi("/auth/signin"),
+    }
+  );
   return (
     <Container>
       <Logo />
-      <_Wrapper>
+      <_Wrapper
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          mutate();
+        }}
+      >
         <Title>회원가입</Title>
         <_Content>
-
-        <_InputRow>
-          <Input
-              value={state.obstacles}
-              name="obstacles"
+          <_InputRow>
+            <Input
+              value={state.caution}
+              name="caution"
               onChange={onHandleChange}
               type="obstacles"
               placeholder="장애사항"
@@ -92,7 +109,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 60px;
 `;
-const _Wrapper = styled.div`
+const _Wrapper = styled.form`
   width: 480px;
   display: flex;
   flex-direction: column;

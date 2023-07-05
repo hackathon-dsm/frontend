@@ -1,15 +1,34 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Taxi } from "../../assets/svg";
-
+import { useForm } from "../../hooks/useForm";
+import { useMutation } from "@tanstack/react-query";
+import { userSignIn } from "../../apis/auth/user";
 export const SignIn = () => {
+  const { state, onHandleChange } = useForm({
+    email: "",
+    password: "",
+  });
+  const navi = useNavigate();
+  const { mutate } = useMutation(() => userSignIn(state), {
+    onSuccess: ({ data }) => {
+      const { access_token, id } = data;
+      localStorage.setItem("access_token", access_token);
+      navi("/call");
+    },
+  });
   return (
     <Container>
       <_LogoWrapper>
         <Taxi /> Texier
       </_LogoWrapper>
-      <_Wrapper>
+      <_Wrapper
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          mutate();
+        }}
+      >
         <Title>로그인</Title>
         <_Content>
           <_InputRow>
@@ -50,7 +69,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 60px;
 `;
-const _Wrapper = styled.div`
+const _Wrapper = styled.form`
   width: 480px;
   display: flex;
   flex-direction: column;
