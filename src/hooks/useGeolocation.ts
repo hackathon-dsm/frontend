@@ -24,9 +24,15 @@ export const useGeolocation = () => {
     );
   }, []);
 
-  const geo2address = (lng: number, lat: number) => {
-    gs.coord2Address(lng, lat, (success) => {
-      setAddress(() => success[0].address.address_name);
+  const geo2address = (
+    lng: number,
+    lat: number,
+    callback?: (address: string) => void
+  ) => {
+    return gs.coord2Address(lng, lat, (success) => {
+      const address = success[0].address.address_name;
+      setAddress(address);
+      if (callback) callback(address);
     });
   };
 

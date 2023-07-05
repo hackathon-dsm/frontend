@@ -3,17 +3,35 @@ import { AddressInput } from "./common/input/Address";
 import { ReactNode } from "react";
 interface PropsType {
   onSubmit: () => void;
+  handcap?: string;
   children: ReactNode;
+  buttonName?: string;
 }
 
-export const CallTaxiForm = ({ onSubmit, children }: PropsType) => {
+export const CallTaxiForm = ({
+  onSubmit,
+  handcap,
+  buttonName = "택시콜",
+  children,
+}: PropsType) => {
   return (
-    <_Wrapper onSubmit={onSubmit}>
-      <_InputWrapper>{children}</_InputWrapper>
-      <_Button>콜택시</_Button>
-    </_Wrapper>
+    <_ButtonWrapper>
+      <_Wrapper onSubmit={onSubmit}>
+        <_InputWrapper>
+          {!!handcap && <_HandCap>{handcap}</_HandCap>}
+          {children}
+        </_InputWrapper>
+      </_Wrapper>
+      <_Button>{buttonName}</_Button>
+    </_ButtonWrapper>
   );
 };
+
+const _ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 const _Wrapper = styled.form`
   width: 600px;
@@ -41,5 +59,21 @@ const _InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  margin: 65px 50px;
+  margin: 65px 30px;
+  > div {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+`;
+
+const _HandCap = styled.button`
+  padding: 16px 18px;
+  border-radius: 20px;
+  background-color: rgba(245, 243, 238, 1);
+  width: fit-content;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(107, 128, 155, 0.5);
 `;

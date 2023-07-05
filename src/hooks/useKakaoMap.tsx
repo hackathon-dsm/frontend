@@ -27,6 +27,7 @@ interface InputOptionType {
 
 export const useKakaoMap = (
   setCenter: (value: GeoLocationType) => void,
+  setFocus: () => void,
   option: InputOptionType
 ) => {
   const [keyword, setKeyword] = useState<string>("");
@@ -34,7 +35,6 @@ export const useKakaoMap = (
   const [geo, setGeo] = useState<GeoLocationType | null>(null);
   const [stop, setStop] = useState<number | undefined | any>();
   const [stopSearch, setSearch] = useState<boolean>(false);
-  const [isFocus, setFocus] = useState<boolean>(false);
 
   const ps = new kakao.maps.services.Places();
 
@@ -64,16 +64,14 @@ export const useKakaoMap = (
       value={keyword}
       name=""
       onChange={(e) => setKeyword(e.target.value)}
-      onFocus={() => setFocus(true)}
-      onBlur={() => setFocus(false)}
+      onFocus={setFocus}
       {...option}
     />
   );
 
   const onLocationChange = (lng: number, lat: number, address: string) => {
-    if (!isFocus) return;
     setGeo({ lng, lat });
-    setSearch(true);
+    setSearch(() => true);
     setKeyword(address);
   };
 
