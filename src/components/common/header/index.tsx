@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Taxi } from "../../../assets/svg";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -8,8 +9,12 @@ export const Header = () => {
         <Taxi /> Texier
       </_LogoWrapper>
       <_LinkButtonWrapper>
-        <Button>택시콜</Button>
-        <Button>마이페이지</Button>
+        <Link to="/">
+          <Button >택시콜</Button>
+        </Link>
+        <Link to="/mypage/member">
+          <Button >마이페이지</Button>
+        </Link>
       </_LinkButtonWrapper>
     </Container>
   );
