@@ -15,6 +15,7 @@ import { MyPageBoardI } from "./pages/mypage/boarding";
 import { DriverSignUp } from "./pages/auth/taxi/signup";
 import { Auth } from "./pages/auth";
 import { Community } from "./pages/mypage/community";
+import { DriverSignIn } from "./pages/auth/taxi/signin";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/auth/signup" element={<SignUp />}></Route>
         <Route path="/auth/signin" element={<SignIn />}></Route>
         <Route path="/auth/taxi/signup" element={<DriverSignUp />}></Route>
+        <Route path="/auth/taxi/signin" element={<DriverSignIn />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
         <Route path="/test2" element={<MainPage />}></Route>
@@ -32,6 +34,7 @@ function App() {
         <Route path="/mypage/payments" element={<MyPagePayments />}></Route>
         <Route path="/mypage/board" element={<MyPageBoardI />}></Route>
         <Route path="/mypage/community" element={<Community />}></Route>
+
       </Routes>
     </GlobalStyle>
   );
