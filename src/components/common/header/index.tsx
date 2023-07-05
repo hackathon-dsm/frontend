@@ -9,7 +9,7 @@ export const Header = () => {
         <Taxi /> Texier
       </_LogoWrapper>
       <_LinkButtonWrapper>
-        <Link to="/">
+        <Link to="/call">
           <Button >택시콜</Button>
         </Link>
         <Link to="/mypage/member">
