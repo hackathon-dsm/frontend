@@ -7,7 +7,7 @@ interface PropsType
     HTMLInputElement
   > {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  type?: "text" | "password" | "email";
+  type?: "text" | "password" | "email" | "phoneNumber" | "obstacles";
   value: string;
   name: string;
   placeholder: string;

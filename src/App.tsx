@@ -12,6 +12,7 @@ import { Boaring } from "./pages/boaring";
 import { MyPageMenberI } from "./pages/mypage_menber_info";
 import { MyPagePayments } from "./pages/mypage_payments";
 import { MyPageBoardI } from "./pages/mypage_boarding_info";
+import { DriverSignUp } from "./pages/driversignin";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/mypage/member" element={<MyPageMenberI />}></Route>
         <Route path="/mypage/payments" element={<MyPagePayments />}></Route>
         <Route path="/mypage/board" element={<MyPageBoardI />}></Route>
+        <Route path="/auth/signup/driver" element={<DriverSignUp />}></Route>
       </Routes>
     </GlobalStyle>
   );

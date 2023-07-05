@@ -5,13 +5,13 @@ import { Taxi } from "../assets/svg";
 import { Input } from "../components/common/input";
 import { useForm } from "../hooks/useForm";
 
-export const SignUp = () => {
+export const DriverSignUp = () => {
   const { state, onHandleChange } = useForm({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    obstacles: ""
+    phoneNumber:  ""
   });
   return (
     <Container>
@@ -21,17 +21,6 @@ export const SignUp = () => {
       <_Wrapper>
         <Title>회원가입</Title>
         <_Content>
-
-        <_InputRow>
-          <Input
-              value={state.obstacles}
-              name="obstacles"
-              onChange={onHandleChange}
-              type="obstacles"
-              placeholder="장애사항"
-            />
-          </_InputRow>
-
           <_InputRow>
             <Input
               value={state.firstName}
@@ -48,6 +37,7 @@ export const SignUp = () => {
               placeholder="이름"
             />
           </_InputRow>
+          
           <_InputRow>
             <Input
               value={state.email}
@@ -60,6 +50,16 @@ export const SignUp = () => {
             <Button width="120px" onClick={() => console.log("중복확인")}>
               중복확인
             </Button>
+          </_InputRow>
+
+          <_InputRow>
+          <Input
+              value={state.phoneNumber}
+              name="phoneNumber"
+              onChange={onHandleChange}
+              type="phoneNumber"
+              placeholder="전화번호"
+            />
           </_InputRow>
 
           <Input
