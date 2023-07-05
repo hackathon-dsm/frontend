@@ -36,7 +36,7 @@ export const Auth = () => {
           />
         </_ButtonWrapper>
       </CallTaxiForm>
-      <Link to={role ? "/signin" : "/taxi/signin"}>
+      <Link to={role ? "/auth/signin" : "/auth/taxi/signin"}>
         <_Button>Taxier 시작하기</_Button>
       </Link>
     </_Wrapper>

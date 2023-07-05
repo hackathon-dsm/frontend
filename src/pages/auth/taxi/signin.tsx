@@ -23,7 +23,7 @@ export const DriverSignIn = () => {
           <Button isSubmit>로그인</Button>
           <_Text>
             비밀번호를 잊으셨나요?
-            <Link to="/auth/signUp">
+            <Link to="/auth/taxi/signup">
               <_Text isLink>회원가입 하기</_Text>
             </Link>
           </_Text>
