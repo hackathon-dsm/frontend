@@ -47,7 +47,7 @@ export const AddressInput = ({
   );
 };
 
-const _Wrapper = styled.div`
+const _Wrapper = styled.div<{ isLink?: string }>`
   position: relative;
   padding: 8px;
   border-radius: 20px;
@@ -55,6 +55,7 @@ const _Wrapper = styled.div`
   align-items: center;
   gap: 20px;
   background-color: rgba(245, 243, 238, 1);
+  margin: ${({ isLink }) => isLink && 0};
 `;
 
 const _IconButton = styled.button`

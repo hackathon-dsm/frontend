@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Taxi } from "../../../assets/svg";
 import { Input } from "../../../components/common/input";
 import { useForm } from "../../../hooks/useForm";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { taxiSignUp } from "../../../apis/auth/taxi";
 
 export const DriverSignUp = () => {
   const { state, onHandleChange } = useForm({
@@ -11,14 +13,30 @@ export const DriverSignUp = () => {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "",
+    phone: "",
+    car_number: "",
   });
+  const navi = useNavigate();
+  const { mutate } = useMutation(
+    () => {
+      const { firstName, lastName, ...arg } = state;
+      return taxiSignUp({ ...arg, name: firstName + lastName });
+    },
+    {
+      onSuccess: () => navi("/auth/taxi/signin"),
+    }
+  );
   return (
     <Container>
       <_LogoWrapper>
         <Taxi /> Texier
       </_LogoWrapper>
-      <_Wrapper>
+      <_Wrapper
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          mutate();
+        }}
+      >
         <Title>회원가입</Title>
         <_Content>
           <_InputRow>
@@ -45,7 +63,6 @@ export const DriverSignUp = () => {
               onChange={onHandleChange}
               type="email"
               placeholder="이메일"
-              errorMsg="오류"
             />
             <Button width="120px" onClick={() => console.log("중복확인")}>
               중복확인
@@ -54,8 +71,8 @@ export const DriverSignUp = () => {
 
           <_InputRow>
             <Input
-              value={state.phoneNumber}
-              name="phoneNumber"
+              value={state.phone}
+              name="phone"
               onChange={onHandleChange}
               type="phoneNumber"
               placeholder="전화번호"
@@ -102,7 +119,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 60px;
 `;
-const _Wrapper = styled.div`
+const _Wrapper = styled.form`
   width: 480px;
   display: flex;
   flex-direction: column;

@@ -64,6 +64,10 @@ export const Main = () => {
     <div>
       <Header />
       <_Wrapper>
+        <CallTaxiForm onSubmit={() => {}} buttonName="택시콜">
+          {startElement}
+          {endElement}
+        </CallTaxiForm>
         {location && center && (
           <Map
             center={center}
@@ -112,10 +116,6 @@ export const Main = () => {
             })}
           </Map>
         )}
-        <CallTaxiForm onSubmit={() => {}} buttonName="택시콜">
-          {startElement}
-          {endElement}
-        </CallTaxiForm>
       </_Wrapper>
     </div>
   );
@@ -123,8 +123,9 @@ export const Main = () => {
 
 const _Wrapper = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 200px;
+  padding: 50px 200px;
+  box-sizing: border-box;
 `;
