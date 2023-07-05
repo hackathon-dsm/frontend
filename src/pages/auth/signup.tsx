@@ -74,7 +74,7 @@ export const SignUp = () => {
           <Button isSubmit>회원가입</Button>
           <_Text>
             이미 아이디가 있으신가요?
-            <Link to="/auth/signUp">
+            <Link to="/auth/signin">
               <_Text isLink>로그인 하기</_Text>
             </Link>
           </_Text>
