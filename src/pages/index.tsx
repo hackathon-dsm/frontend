@@ -139,7 +139,7 @@ const _LogoWrapper = styled.div`
 
 `;
 const Container = styled.div`
-  height: 50px;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
