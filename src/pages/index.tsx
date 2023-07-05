@@ -91,12 +91,15 @@ export const Main = () => {
               <ClickOverlay>{address}</ClickOverlay>
             </CustomOverlayMap>
             {[...start, ...end].map(({ x, y, address_name }) => {
+              const pos = { lng: Number(x), lat: Number(y) };
               return (
                 <CustomMark
                   onClick={(isStart) =>
-                    isStart ? startClick(address_name) : endClick(address_name)
+                    isStart
+                      ? startClick(address_name, pos)
+                      : endClick(address_name, pos)
                   }
-                  position={{ lng: Number(x), lat: Number(y) }}
+                  position={pos}
                   content={address_name}
                 ></CustomMark>
               );

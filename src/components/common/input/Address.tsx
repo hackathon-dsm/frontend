@@ -47,6 +47,7 @@ const _Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  background-color: rgba(245, 243, 238, 1);
 `;
 
 const _IconButton = styled.div`

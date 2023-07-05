@@ -37,7 +37,6 @@ export const useKakaoMap = (
   const [isFocus, setFocus] = useState<boolean>(false);
 
   const ps = new kakao.maps.services.Places();
-  const gc = new kakao.maps.services.Geocoder();
 
   useEffect(() => {
     clearTimeout(stop);
@@ -77,8 +76,9 @@ export const useKakaoMap = (
     setKeyword(address);
   };
 
-  const onMarkClick = (name: string) => {
+  const onMarkClick = (name: string, pos: GeoLocationType) => {
     setKeyword(name);
+    setGeo(pos);
   };
 
   return {
