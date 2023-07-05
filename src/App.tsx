@@ -9,11 +9,12 @@ import { SignUp } from "./pages/auth/signup";
 import { TestPage } from "./pages/test";
 import { MainPage } from "./pages/mainpage";
 import { Boaring } from "./pages/boaring";
-import { MyPageMenberI } from "./pages/mypage_menber_info";
-import { MyPagePayments } from "./pages/mypage_payments";
-import { MyPageBoardI } from "./pages/mypage_boarding_info";
+import { MyPageMenberI } from "./pages/mypage/profile";
+import { MyPagePayments } from "./pages/mypage/payments";
+import { MyPageBoardI } from "./pages/mypage/boarding";
 import { DriverSignUp } from "./pages/auth/taxi/signup";
 import { Auth } from "./pages/auth";
+import { Community } from "./pages/mypage/community";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/mypage/member" element={<MyPageMenberI />}></Route>
         <Route path="/mypage/payments" element={<MyPagePayments />}></Route>
         <Route path="/mypage/board" element={<MyPageBoardI />}></Route>
+        <Route path="/mypage/community" element={<Community />}></Route>
       </Routes>
     </GlobalStyle>
   );
