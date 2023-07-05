@@ -1,82 +1,30 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { Taxi } from "../assets/svg";
-import { Input } from "../components/common/input";
-import { useForm } from "../hooks/useForm";
+import { Taxi } from "../../assets/svg";
 
-export const SignUp = () => {
-  const { state, onHandleChange } = useForm({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    obstacles: ""
-  });
+export const SignIn = () => {
   return (
     <Container>
       <_LogoWrapper>
         <Taxi /> Texier
       </_LogoWrapper>
       <_Wrapper>
-        <Title>회원가입</Title>
+        <Title>로그인</Title>
         <_Content>
-
-        <_InputRow>
-          <Input
-              value={state.obstacles}
-              name="obstacles"
-              onChange={onHandleChange}
-              type="obstacles"
-              placeholder="장애사항"
-            />
-          </_InputRow>
-
           <_InputRow>
-            <Input
-              value={state.firstName}
-              name="firstName"
-              onChange={onHandleChange}
-              type="text"
-              placeholder="성"
-            />
-            <Input
-              value={state.lastName}
-              name="lastName"
-              onChange={onHandleChange}
-              type="text"
-              placeholder="이름"
-            />
-          </_InputRow>
-          <_InputRow>
-            <Input
-              value={state.email}
-              name="email"
-              onChange={onHandleChange}
-              type="email"
-              placeholder="이메일"
-              errorMsg="오류"
-            />
-            <Button width="120px" onClick={() => console.log("중복확인")}>
-              중복확인
-            </Button>
+            <Input type="email" placeholder="이메일" />
           </_InputRow>
 
-          <Input
-            value={state.password}
-            name="password"
-            onChange={onHandleChange}
-            type="password"
-            placeholder="비밀번호"
-          />
+          <Input type="password" placeholder="비밀번호" />
         </_Content>
 
         <_LinkButtonWrapper>
-          <Button isSubmit>회원가입</Button>
+          <Button isSubmit>로그인</Button>
           <_Text>
-            이미 아이디가 있으신가요?
+            비밀번호를 잊으셨나요?
             <Link to="/auth/signUp">
-              <_Text isLink>로그인 하기</_Text>
+              <_Text isLink>회원가입 하기</_Text>
             </Link>
           </_Text>
         </_LinkButtonWrapper>
@@ -127,6 +75,20 @@ const Title = styled.h1`
   font-size: 30px;
   font-weight: 500;
   margin: 0;
+`;
+
+const Input = styled.input`
+  padding-left: 15px;
+  padding: 10px;
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: #f0f4f9;
+  outline: none;
+  border: none;
+  font-size: 17px;
+  font-weight: 500;
 `;
 
 const Button = styled.button<{ width?: string; isSubmit?: boolean }>`

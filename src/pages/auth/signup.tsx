@@ -1,26 +1,36 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { Taxi } from "../assets/svg";
-import { Input } from "../components/common/input";
-import { useForm } from "../hooks/useForm";
+import { Taxi } from "../../assets/svg";
+import { Input } from "../../components/common/input";
+import { useForm } from "../../hooks/useForm";
+import { Logo } from "../../components/common/logo";
 
-export const DriverSignUp = () => {
+export const SignUp = () => {
   const { state, onHandleChange } = useForm({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    phoneNumber:  ""
+    obstacles: ""
   });
   return (
     <Container>
-      <_LogoWrapper>
-        <Taxi /> Texier
-      </_LogoWrapper>
+      <Logo />
       <_Wrapper>
         <Title>회원가입</Title>
         <_Content>
+
+        <_InputRow>
+          <Input
+              value={state.obstacles}
+              name="obstacles"
+              onChange={onHandleChange}
+              type="obstacles"
+              placeholder="장애사항"
+            />
+          </_InputRow>
+
           <_InputRow>
             <Input
               value={state.firstName}
@@ -37,7 +47,6 @@ export const DriverSignUp = () => {
               placeholder="이름"
             />
           </_InputRow>
-          
           <_InputRow>
             <Input
               value={state.email}
@@ -50,16 +59,6 @@ export const DriverSignUp = () => {
             <Button width="120px" onClick={() => console.log("중복확인")}>
               중복확인
             </Button>
-          </_InputRow>
-
-          <_InputRow>
-          <Input
-              value={state.phoneNumber}
-              name="phoneNumber"
-              onChange={onHandleChange}
-              type="phoneNumber"
-              placeholder="전화번호"
-            />
           </_InputRow>
 
           <Input
@@ -84,15 +83,6 @@ export const DriverSignUp = () => {
     </Container>
   );
 };
-
-const _LogoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  font-size: 50px;
-  font-weight: 700;
-`;
 
 const Container = styled.div`
   height: 100vh;

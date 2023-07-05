@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import { AddressInput } from "./common/input/Address";
 import { ReactNode } from "react";
 interface PropsType {
@@ -6,23 +6,25 @@ interface PropsType {
   handcap?: string;
   children: ReactNode;
   buttonName?: string;
+  isLink?: boolean;
 }
 
 export const CallTaxiForm = ({
   onSubmit,
   handcap,
-  buttonName = "택시콜",
+  buttonName,
   children,
+  isLink,
 }: PropsType) => {
   return (
     <_ButtonWrapper>
       <_Wrapper onSubmit={onSubmit}>
-        <_InputWrapper>
+        <_InputWrapper isLink={isLink}>
           {!!handcap && <_HandCap>{handcap}</_HandCap>}
           {children}
         </_InputWrapper>
       </_Wrapper>
-      <_Button>{buttonName}</_Button>
+      {buttonName && <_Button>{buttonName}</_Button>}
     </_ButtonWrapper>
   );
 };
@@ -33,8 +35,8 @@ const _ButtonWrapper = styled.div`
   gap: 20px;
 `;
 
-const _Wrapper = styled.form`
-  width: 600px;
+const _Wrapper = styled.form<{ isLink?: boolean }>`
+  width: ${({ isLink }) => (isLink ? 600 : 480)}px;
   border-radius: 20px;
   background-color: rgba(249, 247, 240, 0.5);
   display: flex;
@@ -55,15 +57,23 @@ const _Button = styled.button`
   background-color: ${({ theme }) => theme.color.main};
 `;
 
-const _InputWrapper = styled.div`
+const _InputWrapper = styled.div<{ isLink?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  margin: 65px 30px;
-  > div {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
+  ${({ isLink }) =>
+    isLink
+      ? css`
+          gap: 20px;
+          margin: 40px;
+        `
+      : css`
+          gap: 50px;
+          margin: 65px 30px;
+          > div {
+            margin-left: 30px;
+            margin-right: 30px;
+          }
+        `}
 `;
 
 const _HandCap = styled.button`

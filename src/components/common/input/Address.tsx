@@ -12,6 +12,7 @@ interface PropsType
   name: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  isLink?: string;
 }
 
 export const AddressInput = ({
@@ -20,6 +21,7 @@ export const AddressInput = ({
   name,
   onChange,
   placeholder,
+  isLink,
   ...arg
 }: PropsType) => {
   return (
@@ -28,20 +30,25 @@ export const AddressInput = ({
         <Location />
       </_IconButton>
       <_Content>
-        <_Label>{label}</_Label>
-        <_Input
-          value={value}
-          name={name}
-          onChange={onChange}
-          placeholder={placeholder}
-          {...arg}
-        />
+        {!isLink && <_Label>{label}</_Label>}
+        {isLink ? (
+          <_LinkText>{isLink}</_LinkText>
+        ) : (
+          <_Input
+            value={value}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            {...arg}
+          />
+        )}
       </_Content>
     </_Wrapper>
   );
 };
 
 const _Wrapper = styled.div`
+  position: relative;
   padding: 8px;
   border-radius: 20px;
   display: flex;
@@ -50,7 +57,7 @@ const _Wrapper = styled.div`
   background-color: rgba(245, 243, 238, 1);
 `;
 
-const _IconButton = styled.div`
+const _IconButton = styled.button`
   width: 84px;
   height: 84px;
   border-radius: 20px;
@@ -79,4 +86,17 @@ const _Input = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
+`;
+
+const _LinkText = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 300;
 `;
