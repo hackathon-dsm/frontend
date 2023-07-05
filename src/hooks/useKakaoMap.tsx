@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Input } from "../components/common/input";
 import { GeoLocationType } from "./useGeolocation";
+import { AddressInput } from "../components/common/input/Address";
 
 interface PlaceList {
   address_name: string;
@@ -19,7 +20,15 @@ interface PlaceList {
 
 const { kakao } = window;
 
-export const useKakaoMap = (setCenter: (value: GeoLocationType) => void) => {
+interface InputOptionType {
+  label: string;
+  placeholder: string;
+}
+
+export const useKakaoMap = (
+  setCenter: (value: GeoLocationType) => void,
+  option: InputOptionType
+) => {
   const [keyword, setKeyword] = useState<string>("");
   const [list, setList] = useState<kakao.maps.services.PlacesSearchResult>([]);
   const [geo, setGeo] = useState<GeoLocationType | null>(null);
@@ -51,13 +60,13 @@ export const useKakaoMap = (setCenter: (value: GeoLocationType) => void) => {
   }, [keyword]);
 
   const SearchElement = (
-    <Input
+    <AddressInput
       value={keyword}
       name=""
       onChange={(e) => setKeyword(e.target.value)}
-      placeholder="장소를 입력해세요"
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
+      {...option}
     />
   );
 

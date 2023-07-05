@@ -1,15 +1,19 @@
 import { styled } from "styled-components";
 import { ReactNode } from "react";
 
-export const DirectionOverlay = () => {
-  return <_Wrapper />;
+interface DirectionType {
+  color?: "red" | "blue";
+}
+
+export const DirectionOverlay = ({ color }: DirectionType) => {
+  return <_Wrapper color={color} />;
 };
 
-const _Wrapper = styled.div`
+const _Wrapper = styled.div<DirectionType>`
   border-radius: 100px;
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: ${({ theme, color = "red" }) => theme.color[color]};
   box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.25);
 `;
 
