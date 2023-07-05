@@ -1,32 +1,28 @@
-// 유저 api 아직 미완입니다, 택시 api로직 그대로 가져온 상태에요!
-
-
 import { instance } from "..";
 
-interface TaxiSignInRequest {
+interface UserSignInRequest {
   email: string;
   password: string;
 }
 
-interface TaxiSignInResponse {
+interface UserSignInResponse {
   access_token: string;
   id: number;
 }
 
-export const taxiSignIn = async (body: TaxiSignInRequest) => {
-  return instance.post<TaxiSignInResponse>("/user/login", body);
+export const taxiSignIn = async (body: UserSignInRequest) => {
+  return instance.post<UserSignInResponse>("/user/login", body);
 };
 
-export interface TaxiSignUpRequest {
+export interface UserSignUpRequest {
   name: string;
   email: string;
   password: string;
-  phone: string;
-  car_number: string;
+  caution: string;
 }
 
-export const taxiSignUp = async (body: TaxiSignUpRequest) => {
-  return await instance.post("/taxi", body);
+export const taxiSignUp = async (body: UserSignUpRequest) => {
+  return await instance.post("/user", body);
 };
 
 
