@@ -15,12 +15,14 @@ import { ClickOverlay, DirectionOverlay } from "../components/CustomOverlay";
 import { CallTaxiForm } from "../components/CallTaxiForm";
 import { AddressInput } from "../components/common/input/Address";
 import { useForm } from "../hooks/useForm";
+import { Taxi } from "../assets/svg";
 
 export const Main = () => {
   const { state, onHandleChange } = useForm({
     start: "",
     end: "",
   });
+  
 
   const { location, setLocation, center, setCenter, address, geo2address } =
     useGeolocation();
@@ -50,6 +52,12 @@ export const Main = () => {
 
   return (
     <div>
+      <Container>
+      <_LogoWrapper>
+        <Taxi /> Texcer
+      </_LogoWrapper>
+      </Container>
+      
       <_Wrapper>
         {location && center && (
           <Map
@@ -111,4 +119,24 @@ const _Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 200px;
+`;
+
+const _LogoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 50px;
+  font-weight: 700;
+
+`;
+const Container = styled.div`
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 50px 20px 0 50px;
+  gap: 60px;
+  
 `;
