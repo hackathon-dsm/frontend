@@ -10,7 +10,7 @@ export const useForm = <T>(initial: T) => {
 
     if (type === "file"){
       const file = (e.currentTarget as HTMLInputElement | null)?.files?.[0] || null;
-      setState({ ...state, [name]: value });
+      setState({ ...state, [name]: file });
     }
     else {
       setState({ ...state, [name]: value });
