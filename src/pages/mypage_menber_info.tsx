@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { Taxi } from "../assets/svg";
 
-export const MyPage = () => {
+// 회원 정보
+export const MyPageMenberI = () => {
   return(
     <div>
       <Container>
