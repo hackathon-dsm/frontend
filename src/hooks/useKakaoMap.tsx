@@ -42,20 +42,21 @@ export const useKakaoMap = (
     clearTimeout(stop);
     if (stopSearch) setSearch(false);
     else
-      setStop(
-        setTimeout(
-          () =>
-            ps.keywordSearch(
-              keyword || "대전",
-              (e: kakao.maps.services.PlacesSearchResult) => {
-                if (!e.length) return;
-                setList(e);
-                setCenter({ lng: Number(e[0].x), lat: Number(e[0].y) });
-              }
-            ),
-          3000
-        )
-      );
+      keyword &&
+        setStop(
+          setTimeout(
+            () =>
+              ps.keywordSearch(
+                keyword || "대전",
+                (e: kakao.maps.services.PlacesSearchResult) => {
+                  if (!e.length) return;
+                  setList(e);
+                  setCenter({ lng: Number(e[0].x), lat: Number(e[0].y) });
+                }
+              ),
+            3000
+          )
+        );
   }, [keyword]);
 
   const SearchElement = (

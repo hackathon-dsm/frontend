@@ -8,7 +8,7 @@ import { SignIn } from "./pages/signin";
 import { SignUp } from "./pages/signup";
 import { TestPage } from "./pages/test";
 import { MainPage } from "./pages/mainpage";
-
+import { Boaring } from "./pages/boaring";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/auth/signin" element={<SignIn />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
         <Route path="/test2" element={<MainPage />}></Route>
-
+        <Route path="/boaring" element={<Boaring />}></Route>
       </Routes>
     </GlobalStyle>
   );
