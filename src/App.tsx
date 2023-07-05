@@ -21,7 +21,7 @@ function App() {
   return (
     <GlobalStyle>
       <Routes>
-        <Route path="/" element={<Main />}></Route>
+        <Route path="/call" element={<Main />}></Route>
         <Route path="/auth/signup" element={<SignUp />}></Route>
         <Route path="/auth/signin" element={<SignIn />}></Route>
         <Route path="/auth/taxi/signup" element={<DriverSignUp />}></Route>

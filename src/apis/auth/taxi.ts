@@ -1,7 +1,17 @@
 import { instance } from "..";
 
-export const taxiSignIn = async () => {
-  return instance.post("asf");
+interface TaxiSignInRequest {
+  email: string;
+  password: string;
+}
+
+interface TaxiSignInResponse {
+  access_token: string;
+  id: number;
+}
+
+export const taxiSignIn = async (body: TaxiSignInRequest) => {
+  return instance.post<TaxiSignInResponse>("/user/login", body);
 };
 
 export interface TaxiSignUpRequest {
