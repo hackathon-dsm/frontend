@@ -16,13 +16,14 @@ import { CallTaxiForm } from "../components/CallTaxiForm";
 import { AddressInput } from "../components/common/input/Address";
 import { useForm } from "../hooks/useForm";
 import { Taxi } from "../assets/svg";
+import { UserMark } from "../components/UserMark";
 
 export const Main = () => {
   const { state, onHandleChange } = useForm({
     start: "",
     end: "",
   });
-  
+  const [isFocus, setFocus] = useState<boolean>(false);
 
   const { location, setLocation, center, setCenter, address, geo2address } =
     useGeolocation();
@@ -32,20 +33,28 @@ export const Main = () => {
     onLocationChange: locationStartChange,
     SearchElement: startElement,
     onMarkClick: startClick,
-  } = useKakaoMap((value: GeoLocationType) => setCenter(value), {
-    placeholder: "출발지를 정해 주세요",
-    label: "출발지",
-  });
+  } = useKakaoMap(
+    (value: GeoLocationType) => setCenter(value),
+    () => setFocus(true),
+    {
+      placeholder: "출발지를 정해 주세요",
+      label: "출발지",
+    }
+  );
   const {
     list: end,
     geo: endGeo,
     onLocationChange: locationEndChange,
     SearchElement: endElement,
     onMarkClick: endClick,
-  } = useKakaoMap((value: GeoLocationType) => setCenter(value), {
-    placeholder: "도착지를 정해 주세요",
-    label: "도착지",
-  });
+  } = useKakaoMap(
+    (value: GeoLocationType) => setCenter(value),
+    () => setFocus(false),
+    {
+      placeholder: "도착지를 정해 주세요",
+      label: "도착지",
+    }
+  );
 
   const common = { lat: 36.35232530104873, lng: 127.39250839098673 };
   const [move, moveChange] = useCalculateLine(location, common);
@@ -53,15 +62,14 @@ export const Main = () => {
   return (
     <div>
       <Container>
-      <_LogoWrapper>
-        <Taxi /> Texier
-      </_LogoWrapper>
-      <_LinkButtonWrapper>
-        <Button>택시콜</Button>
-        <Button>마이페이지</Button>
-      </_LinkButtonWrapper>
+        <_LogoWrapper>
+          <Taxi /> Texier
+        </_LogoWrapper>
+        <_LinkButtonWrapper>
+          <Button>택시콜</Button>
+          <Button>마이페이지</Button>
+        </_LinkButtonWrapper>
       </Container>
-      
       <_Wrapper>
         {location && center && (
           <Map
@@ -72,9 +80,10 @@ export const Main = () => {
               const lat = latLng.getLat();
               const lng = latLng.getLng();
               setLocation({ lat, lng });
-              geo2address(lng, lat);
-              locationStartChange(lng, lat, address);
-              locationEndChange(lng, lat, address);
+              geo2address(lng, lat, (address: string) => {
+                if (isFocus) locationStartChange(lng, lat, address);
+                else locationEndChange(lng, lat, address);
+              });
             }}
           >
             {startGeo && (
@@ -83,18 +92,18 @@ export const Main = () => {
                 yAnchor={0.91}
                 position={startGeo}
               >
-                <DirectionOverlay />
+                <UserMark label="승객 위치" />
               </CustomOverlayMap>
             )}
             {endGeo && (
               <CustomOverlayMap xAnchor={0.4} yAnchor={0.91} position={endGeo}>
-                <DirectionOverlay color="blue" />
+                <UserMark label="목적지 위치" />
               </CustomOverlayMap>
             )}
             <CustomOverlayMap position={location} yAnchor={1.5}>
               <ClickOverlay>{address}</ClickOverlay>
             </CustomOverlayMap>
-            {[...start, ...end].map(({ x, y, address_name }) => {
+            {(isFocus ? start : end).map(({ x, y, address_name }) => {
               const pos = { lng: Number(x), lat: Number(y) };
               return (
                 <CustomMark
@@ -115,7 +124,6 @@ export const Main = () => {
           {endElement}
         </CallTaxiForm>
       </_Wrapper>
-      {Math.floor(move)} m
     </div>
   );
 };
@@ -135,8 +143,6 @@ const _LogoWrapper = styled.div`
   gap: 6px;
   font-size: 50px;
   font-weight: 700;
- 
-
 `;
 const Container = styled.div`
   height: auto;
@@ -169,5 +175,4 @@ const _LinkButtonWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 25px;
-
 `;

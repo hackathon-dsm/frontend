@@ -28,8 +28,8 @@ interface BoaringType {
 
 export const Boaring = () => {
   const { state, onHandleChange } = useForm({
-    start: "",
-    end: "",
+    start: "서울역",
+    end: "대전역",
   });
 
   const { location, setLocation, center, setCenter, address, geo2address } =
@@ -61,7 +61,24 @@ export const Boaring = () => {
         </_LogoWrapper>
       </Container>
       <_Wrapper>
-        <CallTaxiForm onSubmit={() => {}}>d</CallTaxiForm>
+        <CallTaxiForm onSubmit={() => {}} handcap="석고" buttonName="수락하기">
+          <AddressInput
+            label="출발지"
+            value={state.start}
+            placeholder=""
+            onChange={() => {}}
+            name=""
+            disabled
+          />
+          <AddressInput
+            label="도착지"
+            value={state.end}
+            placeholder=""
+            onChange={() => {}}
+            name=""
+            disabled
+          />
+        </CallTaxiForm>
         {location && center && (
           <Map
             center={center}
