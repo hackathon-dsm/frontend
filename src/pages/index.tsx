@@ -54,7 +54,7 @@ export const Main = () => {
     <div>
       <Container>
       <_LogoWrapper>
-        <Taxi /> Texcer
+        <Taxi /> Texier
       </_LogoWrapper>
       <_LinkButtonWrapper>
         <Button>택시콜</Button>

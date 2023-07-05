@@ -57,7 +57,7 @@ export const Boaring = () => {
     <div>
       <Container>
         <_LogoWrapper>
-          <Taxi /> Texcer
+          <Taxi /> Texier
         </_LogoWrapper>
       </Container>
       <_Wrapper>

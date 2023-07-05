@@ -15,7 +15,7 @@ export const SignUp = () => {
   return (
     <Container>
       <_LogoWrapper>
-        <Taxi /> Texcer
+        <Taxi /> Texier
       </_LogoWrapper>
       <_Wrapper>
         <Title>회원가입</Title>

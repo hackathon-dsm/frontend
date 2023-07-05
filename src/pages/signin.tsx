@@ -7,7 +7,7 @@ export const SignIn = () => {
   return (
     <Container>
       <_LogoWrapper>
-        <Taxi /> Texcer
+        <Taxi /> Texier
       </_LogoWrapper>
       <_Wrapper>
         <Title>로그인</Title>
