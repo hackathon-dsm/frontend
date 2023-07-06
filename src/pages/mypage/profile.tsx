@@ -8,11 +8,11 @@ import { Layer, SubTitle } from "../../components/MyPage";
 export const MyPageMenberI = () => {
   return (
     <Layer title="회원정보">
-      <SubTitle label="기모띠">
+      <SubTitle label="기본 정보">
         <_Card>
-          <_Text>이름: 기모씨</_Text>
-          <_Text>전번: 010</_Text>
-          <_Text>이메일: tao</_Text>
+          <_Text>이름: 김태완</_Text>
+          <_Text>전번: 01073559975</_Text>
+          <_Text>이메일: tao7108031@gmail.com</_Text>
         </_Card>
       </SubTitle>
     </Layer>

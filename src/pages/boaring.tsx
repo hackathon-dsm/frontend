@@ -25,6 +25,7 @@ import {
   getNobodyTakeTaxies,
 } from "../apis/call/user";
 import { toast } from "react-toastify";
+import { Header } from "../components/common/header";
 
 const { kakao } = window;
 
@@ -35,9 +36,9 @@ interface BoaringType {
 
 export const Boaring = () => {
   const { state, onHandleChange, setState } = useForm({
-    departure: "서울역",
-    destination: "대전역",
-    visitor_caution: "",
+    departure: "",
+    destination: "",
+    visitor_caution: "사용자의 장애 사항입니다",
     call_id: 0,
   });
 
@@ -87,21 +88,17 @@ export const Boaring = () => {
   data?.data;
   return (
     <div>
-      <Container>
-        <_LogoWrapper>
-          <Taxi /> Texier
-        </_LogoWrapper>
-      </Container>
+      <Header />
       <_Wrapper>
         <CallTaxiForm
           onSubmit={mutate}
-          handcap={"장애 사항: " + state.visitor_caution || "비공개"}
+          handcap={"장애 사항: " + state.visitor_caution}
           buttonName="수락하기"
         >
           <AddressInput
             label="출발지"
             value={state.departure}
-            placeholder=""
+            placeholder="사용자의 출발지입니다."
             onChange={() => {}}
             name=""
             disabled
@@ -109,7 +106,7 @@ export const Boaring = () => {
           <AddressInput
             label="도착지"
             value={state.destination}
-            placeholder=""
+            placeholder="사용자의 도착지입니다."
             onChange={() => {}}
             name=""
             disabled
@@ -143,10 +140,11 @@ export const Boaring = () => {
 
 const _Wrapper = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 200px;
+  padding: 50px 200px;
+  box-sizing: border-box;
 `;
 
 const _LogoWrapper = styled.div`

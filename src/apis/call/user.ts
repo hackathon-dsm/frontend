@@ -74,4 +74,4 @@ export const getNobodyTakeTaxies = async () => {
 
 export const cancleCall = async (id: number) => {
   return await instance.patch("/call/cancel/" + id);
-};
+}

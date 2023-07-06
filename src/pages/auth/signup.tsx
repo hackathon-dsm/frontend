@@ -8,6 +8,7 @@ import { Logo } from "../../components/common/logo";
 import { userSignUp } from "../../apis/auth/user";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const SignUp = () => {
   const { state, onHandleChange } = useForm({
@@ -24,7 +25,13 @@ export const SignUp = () => {
       return userSignUp({ ...arg, name: firstName + lastName });
     },
     {
-      onSuccess: () => navi("/auth/signin"),
+      onSuccess: () => {
+        navi("/auth/signin");
+        toast("회원가입에 성공했습니다.");
+      },
+      onError: () => {
+        toast("회원가입에 실패했습니다.");
+      },
     }
   );
   return (
@@ -71,7 +78,6 @@ export const SignUp = () => {
               onChange={onHandleChange}
               type="email"
               placeholder="이메일"
-              errorMsg="오류"
             />
             <Button width="120px" onClick={() => console.log("중복확인")}>
               중복확인

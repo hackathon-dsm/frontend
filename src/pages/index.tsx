@@ -65,10 +65,16 @@ export const Main = () => {
     () => catchCall({ departure: startKeyword, destination: endKeyword }),
     {
       onSuccess: () => {
-        toast("성공적으로 택시를 불렀습니다.");
+        toast("성공적으로 택시를 불렀습니다.", {
+          type: "success",
+          autoClose: 1000,
+        });
       },
       onError: () => {
-        toast("택시를 부르는 데 실패했습니다.");
+        toast("택시를 부르는 데 실패했습니다.", {
+          type: "error",
+          autoClose: 1000,
+        });
       },
     }
   );

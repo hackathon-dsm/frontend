@@ -12,7 +12,7 @@ export const MyPageBoardI = () => {
   console.log(data);
   return (
     <Layer title="회원정보">
-      <SubTitle label="기모띠">
+      <SubTitle label="택시">
         {data &&
           data.data.map(({departure,destination,created_at}) => {
             const [first] = created_at.split("T")
