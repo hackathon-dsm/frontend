@@ -24,7 +24,7 @@ export const CallTaxiForm = ({
           {children}
         </_InputWrapper>
       </_Wrapper>
-      {buttonName && <_Button>{buttonName}</_Button>}
+      {buttonName && <_Button onClick={onSubmit}>{buttonName}</_Button>}
     </_ButtonWrapper>
   );
 };

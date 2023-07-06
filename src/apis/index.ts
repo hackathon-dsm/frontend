@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-export const instance = axios.create({ baseURL: "http://3.36.100.202:3000" });
+export const instance = axios.create({ baseURL: "http://13.125.196.148:3000" });
 
 instance.interceptors.request.use(
   async function (config) {

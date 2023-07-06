@@ -82,6 +82,7 @@ export const useKakaoMap = (
 
   return {
     list,
+    keyword,
     geo,
     SearchElement,
     onLocationChange,

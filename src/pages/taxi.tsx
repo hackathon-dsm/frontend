@@ -18,10 +18,8 @@ import { useForm } from "../hooks/useForm";
 import { Taxi } from "../assets/svg";
 import { UserMark } from "../components/UserMark";
 import { Header } from "../components/common/header";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { cancleCall, catchCall, getNobodyTakeTaxies } from "../apis/call/user";
 
-export const Main = () => {
+export const FindUser = () => {
   const { state, onHandleChange } = useForm({
     start: "",
     end: "",
@@ -33,7 +31,6 @@ export const Main = () => {
   const {
     list: start,
     geo: startGeo,
-    keyword: startKeyword,
     onLocationChange: locationStartChange,
     SearchElement: startElement,
     onMarkClick: startClick,
@@ -48,7 +45,6 @@ export const Main = () => {
   const {
     list: end,
     geo: endGeo,
-    keyword: endKeyword,
     onLocationChange: locationEndChange,
     SearchElement: endElement,
     onMarkClick: endClick,
@@ -60,22 +56,15 @@ export const Main = () => {
       label: "도착지",
     }
   );
-  const { mutate, data } = useMutation(() =>
-    catchCall({ departure: startKeyword, destination: endKeyword })
-  );
-  const callId = typeof data?.data.call_id === "number";
-  const { mutate: cancle } = useMutation(() =>
-    cancleCall(data?.data.call_id || 0)
-  );
+
+  const common = { lat: 36.35232530104873, lng: 127.39250839098673 };
+  const [move, moveChange] = useCalculateLine(location, common);
 
   return (
     <div>
       <Header />
       <_Wrapper>
-        <CallTaxiForm
-          onSubmit={callId ? cancle : mutate}
-          buttonName={callId ? "취소" : "택시콜"}
-        >
+        <CallTaxiForm onSubmit={() => {}} buttonName="택시콜">
           {startElement}
           {endElement}
         </CallTaxiForm>

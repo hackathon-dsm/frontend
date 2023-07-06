@@ -32,10 +32,22 @@ export const SignIn = () => {
         <Title>로그인</Title>
         <_Content>
           <_InputRow>
-            <Input type="email" placeholder="이메일" />
+            <Input
+              type="email"
+              placeholder="이메일"
+              value={state.email}
+              onChange={onHandleChange}
+              name="email"
+            />
           </_InputRow>
 
-          <Input type="password" placeholder="비밀번호" />
+          <Input
+            type="password"
+            placeholder="비밀번호"
+            value={state.password}
+            onChange={onHandleChange}
+            name="password"
+          />
         </_Content>
 
         <_LinkButtonWrapper>

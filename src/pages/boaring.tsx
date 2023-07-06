@@ -17,7 +17,14 @@ import { AddressInput } from "../components/common/input/Address";
 import { useForm } from "../hooks/useForm";
 import { Taxi } from "../assets/svg";
 import { UserLocation } from "../assets/svg/UserLocation";
-import { UserMark } from "../components/UserMark";
+import { UserMark, UserMarkPos } from "../components/UserMark";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  NobodyTaxiesType,
+  getCall,
+  getNobodyTakeTaxies,
+} from "../apis/call/user";
+import { toast } from "react-toastify";
 
 const { kakao } = window;
 
@@ -27,9 +34,11 @@ interface BoaringType {
 }
 
 export const Boaring = () => {
-  const { state, onHandleChange } = useForm({
-    start: "서울역",
-    end: "대전역",
+  const { state, onHandleChange, setState } = useForm({
+    departure: "서울역",
+    destination: "대전역",
+    visitor_caution: "",
+    call_id: 0,
   });
 
   const { location, setLocation, center, setCenter, address, geo2address } =
@@ -53,6 +62,29 @@ export const Boaring = () => {
       }));
     });
   }, []);
+
+  const { data } = useQuery(["getTaxies"], () => getNobodyTakeTaxies(), {});
+  const { mutate } = useMutation(() => getCall(state.call_id), {
+    onSuccess: () => {
+      toast.success("성공적으로 수락했습니다", {
+        autoClose: 1000,
+        type: "success",
+      });
+    },
+    onError: () => {
+      toast("수락을 실패했습니다.", { autoClose: 1000, type: "error" });
+      console.log(1);
+    },
+  });
+  const onChange = ({
+    departure,
+    destination,
+    visitor_caution,
+    call_id,
+  }: NobodyTaxiesType) => {
+    setState({ departure, destination, visitor_caution, call_id });
+  };
+  data?.data;
   return (
     <div>
       <Container>
@@ -61,10 +93,14 @@ export const Boaring = () => {
         </_LogoWrapper>
       </Container>
       <_Wrapper>
-        <CallTaxiForm onSubmit={() => {}} handcap="석고" buttonName="수락하기">
+        <CallTaxiForm
+          onSubmit={mutate}
+          handcap={"장애 사항: " + state.visitor_caution || "비공개"}
+          buttonName="수락하기"
+        >
           <AddressInput
             label="출발지"
-            value={state.start}
+            value={state.departure}
             placeholder=""
             onChange={() => {}}
             name=""
@@ -72,7 +108,7 @@ export const Boaring = () => {
           />
           <AddressInput
             label="도착지"
-            value={state.end}
+            value={state.destination}
             placeholder=""
             onChange={() => {}}
             name=""
@@ -91,20 +127,10 @@ export const Boaring = () => {
               geo2address(lng, lat);
             }}
           >
-            {pos.start && (
-              <CustomOverlayMap
-                xAnchor={0.4}
-                yAnchor={0.91}
-                position={pos.start}
-              >
-                <UserMark label="승객 위치" />
-              </CustomOverlayMap>
-            )}
-            {pos.end && (
-              <CustomOverlayMap xAnchor={0.5} yAnchor={0.9} position={pos.end}>
-                <UserMark label="목적지 위치" />
-              </CustomOverlayMap>
-            )}
+            {data &&
+              data.data?.map((data) => (
+                <UserMarkPos data={data} onClick={onChange} />
+              ))}
             <CustomOverlayMap position={location} yAnchor={1.5}>
               <ClickOverlay>{address}</ClickOverlay>
             </CustomOverlayMap>
