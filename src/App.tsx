@@ -16,10 +16,13 @@ import { DriverSignUp } from "./pages/auth/taxi/signup";
 import { Auth } from "./pages/auth";
 import { Community } from "./pages/mypage/community";
 import { DriverSignIn } from "./pages/auth/taxi/signin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <GlobalStyle>
+      <ToastContainer />
       <Routes>
         <Route path="/call" element={<Main />}></Route>
         <Route path="/auth/signup" element={<SignUp />}></Route>
@@ -34,7 +37,6 @@ function App() {
         <Route path="/mypage/payments" element={<MyPagePayments />}></Route>
         <Route path="/mypage/board" element={<MyPageBoardI />}></Route>
         <Route path="/mypage/community" element={<Community />}></Route>
-
       </Routes>
     </GlobalStyle>
   );

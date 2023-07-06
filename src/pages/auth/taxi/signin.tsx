@@ -5,6 +5,7 @@ import { Taxi } from "../../../assets/svg";
 import { useForm } from "../../../hooks/useForm";
 import { taxiSignIn } from "../../../apis/auth/taxi";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const DriverSignIn = () => {
   const { state, onHandleChange } = useForm({
@@ -17,6 +18,10 @@ export const DriverSignIn = () => {
       const { access_token, id } = data;
       localStorage.setItem("access_token", access_token);
       navi("/call");
+      toast("로그인에 성공했습니다.", { type: "success", autoClose: 1000 });
+    },
+    onError: () => {
+      toast("로그인에 실패했습니다.", { type: "error", autoClose: 1000 });
     },
   });
   return (

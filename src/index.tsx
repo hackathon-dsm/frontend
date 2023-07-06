@@ -13,11 +13,10 @@ const query = new QueryClient({});
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={query}>
-      <ToastContainer />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+    <QueryClientProvider client={query}>   
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
 );

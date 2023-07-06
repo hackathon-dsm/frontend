@@ -36,8 +36,22 @@ export const getCall = async (id: number) => {
   return await instance.patch<GetCallResponse>("/call/" + id);
 };
 
-export const checkCall = async (id: number) => {
-  return await instance.get("");
+interface CheckCallType {
+  call_id: 1;
+  departure: "출발지";
+  destination: "도착지";
+  visitor_id: 1;
+  taxi_id: null;
+  created_at: "2023-07-05T09:15:16.011Z";
+  updated_at: "2023-07-05T16:12:52.000Z";
+  visitor_name: "이름";
+  visitor_caution: "장애사항";
+  taxi_name: null;
+  taxi_phone: null;
+}
+
+export const checkCall = async () => {
+  return await instance.get<CheckCallType[]>("/call/my");
 };
 
 export type NobodyTaxiesType = {

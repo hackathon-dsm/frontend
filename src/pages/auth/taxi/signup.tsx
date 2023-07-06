@@ -6,6 +6,7 @@ import { Input } from "../../../components/common/input";
 import { useForm } from "../../../hooks/useForm";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { taxiSignUp } from "../../../apis/auth/taxi";
+import { toast } from "react-toastify";
 
 export const DriverSignUp = () => {
   const { state, onHandleChange } = useForm({
@@ -23,7 +24,13 @@ export const DriverSignUp = () => {
       return taxiSignUp({ ...arg, name: firstName + lastName });
     },
     {
-      onSuccess: () => navi("/auth/taxi/signin"),
+      onSuccess: () => {
+        navi("/auth/taxi/signin");
+        toast("회원가입에 설공했습니다.", { type: "success", autoClose: 1000 });
+      },
+      onError: () => {
+        toast("회원가입에 실패했습니다.", { type: "error", autoClose: 1000 });
+      },
     }
   );
   return (

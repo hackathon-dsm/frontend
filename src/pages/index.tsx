@@ -20,6 +20,7 @@ import { UserMark } from "../components/UserMark";
 import { Header } from "../components/common/header";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { cancleCall, catchCall, getNobodyTakeTaxies } from "../apis/call/user";
+import { toast } from "react-toastify";
 
 export const Main = () => {
   const { state, onHandleChange } = useForm({
@@ -60,8 +61,16 @@ export const Main = () => {
       label: "도착지",
     }
   );
-  const { mutate, data } = useMutation(() =>
-    catchCall({ departure: startKeyword, destination: endKeyword })
+  const { mutate, data } = useMutation(
+    () => catchCall({ departure: startKeyword, destination: endKeyword }),
+    {
+      onSuccess: () => {
+        toast("성공적으로 택시를 불렀습니다.");
+      },
+      onError: () => {
+        toast("택시를 부르는 데 실패했습니다.");
+      },
+    }
   );
   const callId = typeof data?.data.call_id === "number";
   const { mutate: cancle } = useMutation(() =>
@@ -72,10 +81,7 @@ export const Main = () => {
     <div>
       <Header />
       <_Wrapper>
-        <CallTaxiForm
-          onSubmit={callId ? cancle : mutate}
-          buttonName={callId ? "취소" : "택시콜"}
-        >
+        <CallTaxiForm onSubmit={callId ? cancle : mutate} buttonName={"택시콜"}>
           {startElement}
           {endElement}
         </CallTaxiForm>
