@@ -17,7 +17,7 @@ export const DriverSignIn = () => {
     onSuccess: ({ data }) => {
       const { access_token, id } = data;
       localStorage.setItem("access_token", access_token);
-      navi("/call");
+      navi("/boaring");
       toast("로그인에 성공했습니다.", { type: "success", autoClose: 1000 });
     },
     onError: () => {
