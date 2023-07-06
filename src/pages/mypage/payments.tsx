@@ -10,13 +10,11 @@ import { useForm } from "../../hooks/useForm";
 //결제 수단
 
 interface PasswordType {
-  middle: string;
-  last: string;
+  phone: string;
 }
 export const MyPagePayments = () => {
   const { state, onHandleChange } = useForm<PasswordType>({
-    middle: "0000",
-    last: "0000",
+    phone: "010-0000-0000",
   });
   const [pass, setPass] = useState<boolean>(false);
 
@@ -43,24 +41,24 @@ export const MyPagePayments = () => {
               010-
               {pass ? (
                 <_Input
-                  value={state.middle}
+                  value={state.phone.split("-")[1]}
                   onChange={onHandleChange}
                   placeholder=""
-                  name="middle"
+                  name="phone"
                 />
               ) : (
-                state.middle
+                state.phone.split("-")[1]
               )}
               -
               {pass ? (
                 <_Input
-                  value={state.last}
+                  value={state.phone.split("-")[2]}
                   onChange={onHandleChange}
                   placeholder=""
-                  name="last"
+                  name="phone"
                 />
               ) : (
-                state.last
+                state.phone.split("-")[2]
               )}
             </_ContentRow>
 
